@@ -7,15 +7,22 @@ var connection = require('../config/connection.js')
 
 //this is the readers_controller.js file
 router.get('/', function(req,res) {
-  var query = "SELECT l.created, l.time_lapsed, b.title , DATE_FORMAT(l.created, '%d/%l/%Y') AS 'log_created' FROM logs l LEFT JOIN books b ON l.book_id = b.id WHERE user_id = ?";
+  var query = "SELECT l.created, l.time_lapsed, b.title , DATE_FORMAT(l.created, '%d/%m/%Y') AS 'log_created' FROM logs l LEFT JOIN books b ON l.book_id = b.id WHERE user_id = ?";
   connection.query(query, [ req.session.user_id ], function(err, logs){
     //console.log(logs);
+    var sum = 0;
+    if (logs){
+      for (var i = 0; i < logs.length; i++) {
+        sum += logs[i].time_lapsed
+      }
+    }
     res.render('readers/readers', { 
       logs: logs,
       logged_in: req.session.logged_in,
       user_email: req.session.user_email,
       user_id: req.session.user_id,
-      usertype: req.session.usertype
+      usertype: req.session.usertype,
+      sum : sum
     });
   });
 
