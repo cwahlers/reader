@@ -7,7 +7,24 @@ var connection = require('../config/connection.js')
 
 //this is the readers_controller.js file
 router.get('/', function(req,res) {
-  res.render('readers/readers', req.session);
+  var query = "SELECT l.created, l.time_lapsed, b.title , DATE_FORMAT(l.created, '%d/%l/%Y') AS 'log_created' FROM logs l LEFT JOIN books b ON l.book_id = b.id WHERE user_id = ?";
+  connection.query(query, [ req.session.user_id ], function(err, logs){
+    //console.log(logs);
+    res.render('readers/readers', { 
+      logs: logs,
+      logged_in: req.session.logged_in,
+      user_email: req.session.user_email,
+      user_id: req.session.user_id,
+      usertype: req.session.usertype
+    });
+  });
+
+  // var query = "SELECT * FROM books WHERE user_id = ?";
+  // connection.query(query, [ req.session.user_id ], function(err, books){
+
+  // });
+
+  // res.render('readers/readers', req.session);
 });
 
 
@@ -18,13 +35,31 @@ router.post('/log', function(req,res) {
   // book_id int NOT NULL,
   // created date NOT NULL,
   // time_lapsed dec(6,2),
-  var query = "INSERT INTO logs (user_id, book_id, created, time_lapsed ) VALUES (?, ?, ?, ?)"
-  var currentDate = dateutil.now();
-
-    connection.query(query, [ req.session.user_id, req.body.book_id, currentDate, req.body.time ], function(err, response) {
+  var currentDate = dateutil.format( dateutil.today(), 'Y-m-d');
+  var totalTime = req.body.totalTime;
+  var query = "SELECT * FROM log WHERE user_id = ? AND book_id = ? AND created = ? ";
+  connection.query(query, [ req.session.user_id, req.body.book, currentDate ], function(err, logs){
+    console.log(logs);
+    if(err){
+      //Assumes no time logged
+      query = "INSERT INTO logs (user_id, book_id, created, time_lapsed ) VALUES (?, ?, ?, ?)"
+      connection.query(query, [ req.session.user_id, req.body.book, currentDate, req.body.totalTime ], function(err, response) {
       if (err) res.send('500');
       else res.render('readers/readers', req.session);
-    });
+      });
+    }else if ( logs.time_lapsed >= 0 ) {
+      totalTime =+ logs.time_lapsed;
+      query = "UPDATE logs SET time_lapsed = ? WHERE user_id = ? AND book_id = ? AND created = ?"
+      
+      connection.query(query, [ totalTime, req.session.user_id, req.body.book, currentDate ], function(err, response) {
+        if (err) res.send('500');
+        else res.render('readers/readers', req.session);
+      });
+  };
+
+  });
+
+
 });
 
 

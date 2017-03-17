@@ -13,7 +13,7 @@
  a:focus,a:hover{color:#fcbd20}
  hr{max-width:100px;margin:25px auto 0;border-width:1px;border-color:rgba(34,34,34,.1)}
  hr.light{border-color:#fff}
- input{color:black;}
+ input,select{color:black;}
  p{font-size:18px;line-height:1.5;margin-bottom:20px}
  .navbar-default{background-color:#fff;border-color:rgba(34,34,34,.05);-webkit-transition:all .35s;-moz-transition:all .35s;transition:all .35s}
  .navbar-default .navbar-header .navbar-brand{color:#fdcc52}

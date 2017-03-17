@@ -8,12 +8,23 @@
                             <img src="/assets/img/goRead.png" alt="GO Read!" class="img-responsive">
                             <br>
                             
-                            <div>
-                                
+                            <form class="create-update-form" action="/readers/log" method="POST">
+                                <label>Book: 
+                                    <select name="book" >
+                                        <option value="1">First Book</option>
+                                        <option value="2">Second Book</option>
+                                        <option value="3">Third Book</option>
+                                        <option value="4">Fourth Book</option>
+                                    </select>
+                                </label>
+
+
                                 <h2 class="goal">Goal:</h2>
                                 <div class="display-time">
                                     <input class="time-goal" type="number" name="time" value="30"> Minutes
-                                </div>       
+                                    
+                                </div> 
+                                <input class="total-time" style="display:none;" type="number" name="totalTime">      
                                 <br>  
                                 <br>                          
                                 <div class="btn-group" role="group" aria-label="...">
@@ -21,10 +32,10 @@
                                         <span class="glyphicon glyphicon-play"></span> Start</button>
                                     <button type="button" class="pause btn btn-default">
                                         <span class="glyphicon glyphicon-pause"></span> Pause</button>
-                                    <button type="button" class="stop btn btn-default">
+                                    <button type="submit" class="stop btn btn-default">
                                         <span class="glyphicon glyphicon-stop"></span> Stop</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -90,16 +101,12 @@
                     <h2 class="section-heading">My Progress</h2>
                     
                     <form>
-                        <input list="period" name="progress" >
-
-                        <datalist id="period">
-                            <option value="Current Week">
-                            <option value="Previous Week">
-                            <option value="Last 30 days">
-                            <option value="Last 90 days">
-                        </datalist>
-
-
+                        <select name="period">
+                            <option value="1">Current Week</option>
+                            <option value="2">Previous Week</option>
+                            <option value="3">Last 30 days</option>
+                            <option value="4">Last 90 days</option>
+                        </select>
                         <input type="submit" name="report" value="Go">
                     </form>
 
@@ -111,17 +118,27 @@
                                 <th>Time (minutes)</th>
                             </tr>
                         </thead>
+
                         <tbody>
-                            <tr>
+
+                            {{#each logs}}
+                                <tr>
+                                    <td> {{this.log_created}} </td>
+                                    <td> {{this.title}} </td>
+                                    <td> {{this.time_lapsed}} </td>
+                                </tr>  
+                            {{/each}}
+
+                            <!-- <tr>
                                 <td>1/12/2017</td>
                                 <td>First Book</td>
                                 <td>35</td>
-                            </tr>
-                            <tr>
+                            </tr> -->
+<!--                             <tr>
                                 <td>1/13/2017</td>
                                 <td>First Book</td>
                                 <td>25</td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                         <tfoot>
                             <tr>

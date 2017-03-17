@@ -4,6 +4,7 @@ var number = 0;
 var counter;
 var min = 0;
 var sec = 0;
+//var $totalTime = $('input[name="totalTime"]');
 
 
 // $(".display-time").html("<h2>" + time + "</h2>");
@@ -13,7 +14,6 @@ function run() {
     goal = $(".time-goal").val();
     remaining = goal;
   }
-  
   $(".goal").html("<h2>Goal: " + goal + " Minutes</h2>");
   $(".display-time").html("<h2>Remaining: " + remaining + " Minutes</h2>");
   counter = setInterval(increment, 1000);
@@ -22,12 +22,15 @@ function run() {
 function increment() {
   //  Increase number by one.
   number++;
-
   //  Show the number in the #show-number tag.
   if (number == 60) {
     number = 0;
     min++;
-    remaining = remaining - min;
+    //Min is the number of minutes actually read
+    //$totalTime.val(min);
+    $(".total-time").val(min);
+    //$(".total-time").html("<h2>Total: " + min + " Minutes</h2>");
+    remaining--;
     if (remaining < 0) {
       var extra = min - goal;
       $(".display-time").html("<h2>Extra: " + extra + " Minutes</h2>");
