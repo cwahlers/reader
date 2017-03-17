@@ -8,20 +8,23 @@
                             <img src="/assets/img/goRead.png" alt="GO Read!" class="img-responsive">
                             <br>
                             
-                            <form action="/readers/log" method="POST">
-                                Goal:
-                                <input type="number" name="time" value="30"> Minutes             
+                            <div>
+                                
+                                <h2 class="goal">Goal:</h2>
+                                <div class="display-time">
+                                    <input class="time-goal" type="number" name="time" value="30"> Minutes
+                                </div>       
                                 <br>  
                                 <br>                          
                                 <div class="btn-group" role="group" aria-label="...">
-                                    <button type="button" class="btn btn-default">
+                                    <button type="button" class="start btn btn-default">
                                         <span class="glyphicon glyphicon-play"></span> Start</button>
-                                    <button type="button" class="btn btn-default">
+                                    <button type="button" class="pause btn btn-default">
                                         <span class="glyphicon glyphicon-pause"></span> Pause</button>
-                                    <button type="button" class="btn btn-default">
+                                    <button type="button" class="stop btn btn-default">
                                         <span class="glyphicon glyphicon-stop"></span> Stop</button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -163,3 +166,9 @@
             </ul>
         </div>
     </section>
+
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="crossorigin="anonymous"></script>
+
+    <!-- Time JavaScript -->
+    <script src="/assets/js/time.js"></script>
