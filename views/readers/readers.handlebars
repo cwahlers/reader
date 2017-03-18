@@ -11,17 +11,20 @@
                             <form class="create-update-form" action="/readers/log" method="POST">
                                 <label>Book: 
                                     <select name="book" >
-                                        <option value="1">First Book</option>
-                                        <option value="2">Second Book</option>
-                                        <option value="3">Third Book</option>
-                                        <option value="4">Fourth Book</option>
+                                        {{#each books}}
+                                            <option value= {{this.book_id}} > {{this.title}} </option>
+                                            <!-- <option value="1">First Book</option>
+                                            <option value="2">Second Book</option>
+                                            <option value="3">Third Book</option>
+                                            <option value="4">Fourth Book</option> -->
+                                        {{/each}}
                                     </select>
                                 </label>
 
 
                                 <h2 class="goal">Goal:</h2>
                                 <div class="display-time">
-                                    <input class="time-goal" type="number" name="time" value="30"> Minutes
+                                    <input class="time-goal" type="number" name="time" value="20"> Minutes
                                     
                                 </div> 
                                 <input class="total-time" style="display:none;" type="number" name="totalTime">      
@@ -75,7 +78,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            {{#each books}}
+                                <tr>
+                                    <td> {{this.title}} </td>
+                                    <td> {{this.author}} </td>
+                                    <td> {{this.current_page}} </td>
+                                </tr>
+                            {{/each}}
+                            <!-- <tr>
                                 <td>First Book</td>
                                 <td>Chris</td>
                                 <td>100</td>
@@ -84,7 +94,7 @@
                                 <td>Second Book</td>
                                 <td>Scott</td>
                                 <td>0</td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>

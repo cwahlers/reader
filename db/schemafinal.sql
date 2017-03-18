@@ -33,6 +33,7 @@ CREATE TABLE logs
   book_id int NOT NULL,
   created date NOT NULL,
   time_lapsed dec(6,2),
+  PRIMARY KEY (user_id, book_id, created),
 	FOREIGN KEY (user_id) references users(id),
   FOREIGN KEY (book_id) references books(id)
 );
@@ -46,7 +47,7 @@ CREATE TABLE user_books
   started date,
   current_page int,
   completed date,
-	PRIMARY KEY (id),
+	PRIMARY KEY (id, book_id),
 	FOREIGN KEY (user_id) references users(id),
 	FOREIGN KEY (book_id) references books(id)
 );
@@ -67,6 +68,7 @@ CREATE TABLE class_students
 (
   class_id int NOT NULL,
   student_id int NOT NULL,
+  PRIMARY KEY (class_id, student_id),
   FOREIGN KEY (class_id) references classes(id),
   FOREIGN KEY (student_id) references users(id)
 );
