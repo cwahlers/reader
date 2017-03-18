@@ -60,12 +60,32 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="page-scroll" href="#download">My Books</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#features">My Progress</a>
-                    </li>
+                    
+                    {{#if is_reader}}
+                        <li>
+                            <a class="page-scroll" href="#download">My Books</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#features">My Progress</a>
+                        </li>
+                    {{else if is_teacher}}
+                        <li>
+                            <a class="page-scroll" href="#download">My Kids</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#features">Kids Progress</a>
+                        </li>
+                    {{else}}
+                        <li>
+                            <a class="page-scroll" href="#download">For Parents</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#features">For Educators</a>
+                        </li>
+
+                    {{/if}}
+
+
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
@@ -108,7 +128,7 @@
     <!-- Theme JavaScript -->
     <script src="/assets/js/new-age.min.js"></script>
 
-    
+
 
 </body>
 

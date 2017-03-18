@@ -6,6 +6,7 @@ var connection = require('../config/connection.js')
 
 //this is the parents_controller.js file
 router.get('/', function(req,res) {
+  console.log("Parents");
   res.render('parents/parents', req.session);
 });
 

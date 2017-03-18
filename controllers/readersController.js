@@ -27,6 +27,8 @@ router.get('/', function(req,res) {
         user_email: req.session.user_email,
         user_id: req.session.user_id,
         usertype: req.session.usertype,
+        is_reader: req.session.is_reader,
+        is_parent: req.session.is_parent,
         sum : sum
       });
     });
@@ -92,6 +94,8 @@ router.post('/log', function(req,res) {
                   user_email: req.session.user_email,
                   user_id: req.session.user_id,
                   usertype: req.session.usertype,
+                  is_reader: req.session.is_reader,
+                  is_parent: req.session.is_parent,
                   sum : sum
                 });  //res.render
               });  //user book query
@@ -131,6 +135,8 @@ router.post('/log', function(req,res) {
                   user_email: req.session.user_email,
                   user_id: req.session.user_id,
                   usertype: req.session.usertype,
+                  is_reader: req.session.is_reader,
+                  is_parent: req.session.is_parent,
                   sum : sum
                 });  //res.render
               });  //user book query

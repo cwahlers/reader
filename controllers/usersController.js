@@ -41,9 +41,13 @@ router.post('/login', function(req, res) {
               console.log("Usertype: " + response[0].usertype );
               switch (response[0].usertype){
                   case 'R':
+                    req.session.is_reader = true;
+                    req.session.is_parent = false;
                     res.redirect('/readers');
                     break;
                   case 'P':
+                    req.session.is_reader = false;
+                    req.session.is_parent = true;
                     res.redirect('/parents');
                     break;
                   case 'T':
@@ -88,9 +92,13 @@ router.post('/create', function(req,res) {
 
                 switch (response[0].usertype){
                   case 'R':
+                    req.session.is_reader = true;
+                    req.session.is_parent = false;
                     res.redirect('/readers');
                     break;
                   case 'P':
+                    req.session.is_reader = false;
+                    req.session.is_parent = true;
                     res.redirect('/parents');
                     break;
                   case 'T':
