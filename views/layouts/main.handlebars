@@ -47,8 +47,14 @@
                 </button>
                 
                 {{#if logged_in}}
-                  <a class="navbar-brand page-scroll" href="#page-top">GO Read!</a>
-                  <a class="navbar-brand page-scroll" href="/users/sign-out">Sign Out</a>
+                    {{#if is_reader}}
+                        <a class="navbar-brand page-scroll" href="#page-top">GO Read!</a>
+                    {{else if is_parent}}
+                        <a class="navbar-brand page-scroll" href="#page-top">My Kids!</a>
+                    {{else}}
+                        <a class="navbar-brand page-scroll" href="#page-top">My Classes!</a>
+                    {{/if}}
+                    <a class="navbar-brand page-scroll" href="/users/sign-out">Sign Out</a>
                 {{else}}
                   <a class="navbar-brand page-scroll" href="/users/sign-in">Sign In</a>
                   <a class="navbar-brand page-scroll" href="/users/new">Register</a>
@@ -68,9 +74,9 @@
                         <li>
                             <a class="page-scroll" href="#features">My Progress</a>
                         </li>
-                    {{else if is_teacher}}
+                    {{else if is_parent}}
                         <li>
-                            <a class="page-scroll" href="#download">My Kids</a>
+                            <a class="page-scroll" href="#download">My Kids Books</a>
                         </li>
                         <li>
                             <a class="page-scroll" href="#features">Kids Progress</a>
