@@ -28,9 +28,11 @@ app.set("view engine", "handlebars");
 var applicationController = require("./controllers/applicationController.js");
 var usersController = require("./controllers/usersController.js");
 var readersController = require("./controllers/readersController.js");
+var parentsController = require("./controllers/parentsController.js");
 
 app.use("/", applicationController);
 app.use("/users", usersController);
 app.use("/readers", readersController);
+app.use("/parents", parentsController);
 
 app.listen(port);

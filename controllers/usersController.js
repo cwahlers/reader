@@ -31,14 +31,26 @@ router.post('/login', function(req, res) {
 
         bcrypt.compare(req.body.password, response[0].password_hash, function(err, result) {
             if (result == true){
-
+              console.log("Logged into the app");
               req.session.logged_in = true;
               req.session.user_id = response[0].id;
               req.session.user_email = response[0].email;
               req.session.usertype = response[0].usertype;
               req.session.username = response[0].username;
 
-              res.redirect('/readers');
+              console.log("Usertype: " + response[0].usertype );
+              switch (response[0].usertype){
+                  case 'R':
+                    res.redirect('/readers');
+                    break;
+                  case 'P':
+                    res.redirect('/parents');
+                    break;
+                  case 'T':
+                    res.redirect('/readers');
+                    break;
+                }
+
             }else{
               res.redirect('/users/sign-in')
             }
@@ -79,7 +91,7 @@ router.post('/create', function(req,res) {
                     res.redirect('/readers');
                     break;
                   case 'P':
-                    res.redirect('/readers');
+                    res.redirect('/parents');
                     break;
                   case 'T':
                     res.redirect('/readers');
