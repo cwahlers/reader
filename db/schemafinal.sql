@@ -80,5 +80,6 @@ CREATE TABLE parent_students
   parent_id int NOT NULL,
   student_id int NOT NULL,
   FOREIGN KEY (parent_id) references users(id),
-  FOREIGN KEY (student_id) references users(id)
+  FOREIGN KEY (student_id) references users(id),
+  PRIMARY KEY (parent_id, student_id)
 );
