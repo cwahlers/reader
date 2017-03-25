@@ -4,7 +4,7 @@ var methodOverride = require("method-override");
 var cookieParser =  require("cookie-parser");
 var session = require("express-session");
 var port = process.env.PORT || 3000;
-var app = express();
+var app = module.exports = express(); 
 
 //allow the use of sessions
 app.use(session({ secret: 'app', cookie: { maxAge: 6*1000*1000*1000*1000*1000*1000 }}));
