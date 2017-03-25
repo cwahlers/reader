@@ -1,12 +1,29 @@
 // Set up MySQL connection.
 var mysql = require("mysql");
 
-var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "simple_db"
-});
+// var connection = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "",
+//   database: "simple_db"
+// });
+
+var app = require('../server');
+
+console.log('--------------the environment we are using----------------');
+console.log(app.settings.env);
+console.log('--------------the environment we are using----------------');
+
+if (app.settings.env == 'development'){
+  var connection = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "simple_db"
+  });
+}else {
+  var connection = mysql.createConnection(process.env.JAWSDB_URL);
+}
 
 // Make connection.
 connection.connect(function(err) {

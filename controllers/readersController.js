@@ -52,6 +52,7 @@ router.post('/log', function(req,res) {
   // book_id int NOT NULL,
   // created date NOT NULL,
   // time_lapsed dec(6,2),
+  console.log("Posting time");
   var today = new Date();
   var currentDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
   console.log(currentDate);
@@ -73,33 +74,34 @@ router.post('/log', function(req,res) {
         else {
 
           console.log("Refresh Readers Page - Insert");
+          res.redirect("/readers");
 
-          var query = "SELECT l.created, l.time_lapsed, b.title , DATE_FORMAT(l.created, '%d/%m/%Y') AS 'log_created' FROM logs l LEFT JOIN books b ON l.book_id = b.id WHERE user_id = ?";
-          connection.query(query, [ req.session.user_id ], function(err, logs){
-            //console.log(logs);
-            //Get my books
-            query = "SELECT ub.book_id, b.title, b.author, ub.current_page FROM user_books AS ub LEFT JOIN books AS b ON ub.book_id = b.id WHERE ub.user_id = ?";
-            connection.query(query, [ req.session.user_id ], function(err, books){
-              //console.log(books);
-              var sum = 0;
-              if (logs){
-                for (var i = 0; i < logs.length; i++) {
-                sum += logs[i].time_lapsed
-                }
-              };
-                res.render('readers/readers', { 
-                  logs: logs,
-                  books: books,
-                  logged_in: req.session.logged_in,
-                  user_email: req.session.user_email,
-                  user_id: req.session.user_id,
-                  usertype: req.session.usertype,
-                  is_reader: req.session.is_reader,
-                  is_parent: req.session.is_parent,
-                  sum : sum
-                });  //res.render
-              });  //user book query
-            });
+          // var query = "SELECT l.created, l.time_lapsed, b.title , DATE_FORMAT(l.created, '%d/%m/%Y') AS 'log_created' FROM logs l LEFT JOIN books b ON l.book_id = b.id WHERE user_id = ?";
+          // connection.query(query, [ req.session.user_id ], function(err, logs){
+          //   //console.log(logs);
+          //   //Get my books
+          //   query = "SELECT ub.book_id, b.title, b.author, ub.current_page FROM user_books AS ub LEFT JOIN books AS b ON ub.book_id = b.id WHERE ub.user_id = ?";
+          //   connection.query(query, [ req.session.user_id ], function(err, books){
+          //     //console.log(books);
+          //     var sum = 0;
+          //     if (logs){
+          //       for (var i = 0; i < logs.length; i++) {
+          //       sum += logs[i].time_lapsed
+          //       }
+          //     };
+          //       res.render('readers/readers', { 
+          //         logs: logs,
+          //         books: books,
+          //         logged_in: req.session.logged_in,
+          //         user_email: req.session.user_email,
+          //         user_id: req.session.user_id,
+          //         usertype: req.session.usertype,
+          //         is_reader: req.session.is_reader,
+          //         is_parent: req.session.is_parent,
+          //         sum : sum
+          //       });  //res.render
+          //     });  //user book query
+          //   });
 
         }; //After posting Insert
       });
@@ -114,33 +116,34 @@ router.post('/log', function(req,res) {
         if (err) res.send('600');
         else {
           console.log("Refresh Readers Page - Update");
+          res.redirect("/readers");
 
-          var query = "SELECT l.created, l.time_lapsed, b.title , DATE_FORMAT(l.created, '%d/%m/%Y') AS 'log_created' FROM logs l LEFT JOIN books b ON l.book_id = b.id WHERE user_id = ?";
-          connection.query(query, [ req.session.user_id ], function(err, logs){
-            //console.log(logs);
-            //Get my books
-            query = "SELECT ub.book_id, b.title, b.author, ub.current_page FROM user_books AS ub LEFT JOIN books AS b ON ub.book_id = b.id WHERE ub.user_id = ?";
-            connection.query(query, [ req.session.user_id ], function(err, books){
-              //console.log(books);
-              var sum = 0;
-              if (logs){
-                for (var i = 0; i < logs.length; i++) {
-                sum += logs[i].time_lapsed
-                }
-              };
-                res.render('readers/readers', { 
-                  logs: logs,
-                  books: books,
-                  logged_in: req.session.logged_in,
-                  user_email: req.session.user_email,
-                  user_id: req.session.user_id,
-                  usertype: req.session.usertype,
-                  is_reader: req.session.is_reader,
-                  is_parent: req.session.is_parent,
-                  sum : sum
-                });  //res.render
-              });  //user book query
-            });
+          // var query = "SELECT l.created, l.time_lapsed, b.title , DATE_FORMAT(l.created, '%d/%m/%Y') AS 'log_created' FROM logs l LEFT JOIN books b ON l.book_id = b.id WHERE user_id = ?";
+          // connection.query(query, [ req.session.user_id ], function(err, logs){
+          //   //console.log(logs);
+          //   //Get my books
+          //   query = "SELECT ub.book_id, b.title, b.author, ub.current_page FROM user_books AS ub LEFT JOIN books AS b ON ub.book_id = b.id WHERE ub.user_id = ?";
+          //   connection.query(query, [ req.session.user_id ], function(err, books){
+          //     //console.log(books);
+          //     var sum = 0;
+          //     if (logs){
+          //       for (var i = 0; i < logs.length; i++) {
+          //       sum += logs[i].time_lapsed
+          //       }
+          //     };
+          //       res.render('readers/readers', { 
+          //         logs: logs,
+          //         books: books,
+          //         logged_in: req.session.logged_in,
+          //         user_email: req.session.user_email,
+          //         user_id: req.session.user_id,
+          //         usertype: req.session.usertype,
+          //         is_reader: req.session.is_reader,
+          //         is_parent: req.session.is_parent,
+          //         sum : sum
+          //       });  //res.render
+          //     });  //user book query
+          //   });
 
         };
       });

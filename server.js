@@ -3,7 +3,7 @@ var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var cookieParser =  require("cookie-parser");
 var session = require("express-session");
-var port = 3000;
+var port = process.env.PORT || 3000;
 var app = express();
 
 //allow the use of sessions

@@ -16,7 +16,7 @@ function run() {
   }
   $(".goal").html("<h2>Goal: " + goal + " Minutes</h2>");
   $(".display-time").html("<h2>Remaining: " + remaining + " Minutes</h2>");
-  counter = setInterval(increment, 1000);
+  counter = setInterval(increment, 100);
 }
 
 function increment() {
